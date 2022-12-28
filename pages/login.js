@@ -11,17 +11,17 @@ const login = () => {
 
     return (
         <div className='h-[500px] flex justify-center items-center'>
-            <div className='w-80 p-7'>
+            <div className='w-80 p-7 backdrop-blur-xl bg-white/30 rounded'>
                 <h2 className='text-center text-2xl font-semibold'>Login</h2>
                 <form onSubmit={handleSubmit(handleSignIn)}>
                     <div className='form-control flex flex-col w-full max-w-xs'>
                         <label className='label'><span className='label-text text-gray-100 font-semibold'>Email <span className='text-red-500'>*</span></span></label>
-                        <input type="email" {...register("email", { required: "Email is required" })} placeholder='Your email' className='rounded-md mt-2 py-1 px-2 border border-gray-500' />
+                        <input type="email" name="email" {...register("email", { required: "Email is required" })} placeholder='Your email' className='rounded-md mt-2 py-1 px-2 border border-gray-500' />
                         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
                     </div>
                     <div className='relative form-control mt-2 flex flex-col w-full max-w-xs'>
                         <label className='label'><span className='label-text text-gray-100 font-semibold'>Password <span className='text-red-500'>*</span></span></label>
-                        <input type={showPassword ? "text" : "password"} {...register("password", { required: "Password is required", minLength: { value: 6, message: 'Password must be minimum 6 characters' } })} placeholder='Password' className='mt-2 rounded-md py-1 px-2 border border-gray-500' />
+                        <input type={showPassword ? "text" : "password"} name="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: 'Password must be minimum 6 characters' } })} placeholder='Password' className='mt-2 rounded-md py-1 px-2 border border-gray-500' />
 
                         <div className='absolute bottom-[6.5px] right-1 cursor-pointer' onClick={handleToggleShowPassword}>
                             {showPassword ? (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -37,7 +37,7 @@ const login = () => {
                     </div>
                     <label htmlFor="my-modal-3" onClick={() => setResetPassword(true)} className='label-text text-sm text-gray-100 cursor-pointer underline underline-offset-1'>Forget Password?</label>
                     {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
-                    <input type="submit" value='Login' className='mt-6 cursor-pointer font-semibold text-white w-full max-w-xs bg-green-600 hover:bg-green-700 p-2 rounded-md' />
+                    <input type="submit" value='Login' className='mt-6 cursor-pointer font-semibold text-white w-full max-w-xs bg-black p-2 rounded-md' />
                     <div className='text-center'>
                         <label className='label-text text-gray-50 text-sm'>Don't have an account? <Link href='/signup' className='cursor-pointer font-semibold text-gray-200 underline'>Create Account</Link></label>
                     </div>

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Banner from '../components/Home/Banner'
 import NavBar from '../components/Shared/NavBar'
 
 
@@ -13,6 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Banner></Banner>
       </main>
   </>
   )

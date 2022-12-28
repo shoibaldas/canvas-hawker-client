@@ -51,7 +51,7 @@ const NavBar = () => {
         <ul className="text-white hidden md:flex">
           <li>
             <Link
-              href="/home"
+              href="/"
               className="mx-3 hover:border-b-2 border-green-600"
             >
               Home
@@ -62,7 +62,7 @@ const NavBar = () => {
               href="/home"
               className="mx-3 hover:border-b-2 border-green-600"
             >
-              Blog
+              Shop
             </Link>
           </li>
           <li>
