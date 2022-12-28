@@ -7,7 +7,7 @@ const Footer = () => {
     <div className="backdrop-blur-xl bg-white/30 fixed bottom-0 w-full p-6">
       <div className="flex justify-between">
       <div className="flex">
-        <Image src={Logo} alt="" width={50} />
+        <Image src={Logo} alt="" width={60} height={10} />
         <h1 className="italic text-3xl">
           {" "}
           <span className="text-sky-600">C</span>

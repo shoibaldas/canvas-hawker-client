@@ -17,16 +17,14 @@ const NavBar = () => {
 
   return (
     <>
-    <div style={{
+    <div className="h-screen" style={{
         zIndex: -1,
         position: "fixed",
         width: "100vw",
-        height: "100vh"
       }}>
   <Image 
             src={BG}
           alt="Mountains with snow"
-          fill
           cover
         />
   </div>

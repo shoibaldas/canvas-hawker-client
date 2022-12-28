@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Banner from '../components/Home/Banner'
+import HomeProductItems from '../components/Home/HomeProductItems'
 import NavBar from '../components/Shared/NavBar'
 
 
@@ -15,6 +16,7 @@ export default function Home() {
       </Head>
       <main>
         <Banner></Banner>
+        <HomeProductItems></HomeProductItems>
       </main>
   </>
   )
