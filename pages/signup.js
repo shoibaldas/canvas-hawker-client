@@ -1,36 +1,78 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 
 const signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const handleToggleShowPassword = () => setShowPassword(!showPassword);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const handleRegistration = (data) => console.log(data);
+    const { register, handleSubmit, formState: { errors }, resetField, } = useForm({
+        mode: "onChange",
+        defaultValues: {
+            firstName: "",
+            lastName:"",
+            email: "",
+            password: "",
+            confirmPassword: ""
+        },
+    }
+);
+    const handleRegistration = (data) => {
+        fetch("http://localhost:5000/api/v1/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                if (data.success) {
+                    localStorage.setItem("user", JSON.stringify(data.results));
+                    toast.success("Signup Successfully!");
+                }
+                else {
+                    toast.error("Error!");
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                
+            });
+
+        // reset Field
+        resetField("firstName");
+        resetField("lastName");
+        resetField("email");
+        resetField("password");
+        resetField("confirmPassword");
+    };
+
     return (
-        <div className='h-[500px] flex justify-center items-center'>
-            <div className='max-w-lg p-7 backdrop-blur-xl bg-white/30 rounded'>
+        <div className='h-[600px] flex justify-center items-center'>
+            <div className='w-96 p-6 backdrop-blur-3xl bg-white/10 rounded'>
                 <h2 className='text-center text-2xl mb-0 md:mb-4 font-semibold'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleRegistration)}>
                     <div className='flex flex-col'>
-                        <div className='form-control flex flex-col w-full max-w-xs'>
+                        <div className='form-control flex flex-col w-full max-w-md'>
                             <label className='label'><span className='label-text text-gray-100 font-semibold'>First Name <span className='text-red-500'>*</span></span></label>
                             <input type="text" name="firstName" {...register("firstName", { required: "Email is required" })} placeholder='First Name' className='rounded-md py-1 px-2 border border-gray-500' />
-                            {errors.username && <p className='text-red-600'>{errors.username?.message}</p>}
+                            {errors.firstName && <p className='text-red-600'>{errors.firstName?.message}</p>}
                         </div>
-                        <div className='form-control flex flex-col w-full max-w-xs'>
+                        <div className='form-control flex flex-col w-full max-w-md'>
                             <label className='label'><span className='label-text text-gray-100 font-semibold'>Last Name <span className='text-red-500'>*</span></span></label>
                             <input type="text" name="lastName" {...register("lastName", { required: "Email is required" })} placeholder='Last Name' className='rounded-md py-1 px-2 border border-gray-500' />
-                            {errors.username && <p className='text-red-600'>{errors.username?.message}</p>}
+                            {errors.lastName && <p className='text-red-600'>{errors.lastName?.message}</p>}
                         </div>
-                        <div className='form-control flex flex-col w-full max-w-xs'>
+                        <div className='form-control flex flex-col w-full max-w-md'>
                             <label className='label'><span className='label-text text-gray-100 font-semibold'>Email <span className='text-red-500'>*</span></span></label>
                             <input type="email" name="email" {...register("email", { required: "Email is required" })} placeholder='Email' className='rounded-md py-1 px-2 border border-gray-500' />
                             {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
                         </div>
 
-                        <div className='relative form-control flex flex-col w-full max-w-xs'>
+                        <div className='relative form-control flex flex-col w-full max-w-md'>
                             <label className='label'><span className='label-text text-gray-100 font-semibold'>Password <span className='text-red-500'>*</span></span></label>
                             <input type={showPassword ? "text" : "password"} name="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: 'Password must be minimum 6 characters' } })} placeholder='Password' className='rounded-md py-1 px-2 border border-gray-500' />
 
@@ -45,7 +87,7 @@ const signup = () => {
                                 )}
                             </div>
                         </div>
-                        <div className='relative form-control flex flex-col w-full max-w-xs'>
+                        <div className='relative form-control flex flex-col w-full max-w-md'>
                             <label className='label'><span className='label-text text-gray-100 font-semibold'>Confirm Password <span className='text-red-500'>*</span></span></label>
                             <input type="password" name="confirmPassword" {...register("confirmPassword", { required: "Password is required", minLength: { value: 6, message: 'Password must be minimum 6 characters' } })} placeholder='Confirm Password' className='rounded-md py-1 px-2 border border-gray-500' />
                         </div>

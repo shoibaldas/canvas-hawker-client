@@ -8,7 +8,7 @@ const Banner = () => {
       <Image
         src={banner}
         className="rounded"
-        alt="Mountains with snow"
+        alt=""
         width={700}
         height={700}
       />

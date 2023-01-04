@@ -29,3 +29,8 @@ a {
     color-scheme: dark;
   }
 }
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
